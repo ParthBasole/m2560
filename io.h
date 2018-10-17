@@ -516,7 +516,12 @@ class Serial
 		unsigned char dUmmy;
 		while ( UCSR0A & (1<<RXC0) ) dUmmy = UDR0;
 	}
-
+	uint8_t available(void){	
+		 if((UCSR0A & (1<<RXC0)))			 
+			return 1;				
+ 		else			
+			return 0;
+	}
 	void end(void){
 		flush();
 		UCSR0B&=0xe7;	//disabling RXEN & TXEN
@@ -556,6 +561,12 @@ int uBrr;		/*Set baud rate */
 		while ( UCSR1A & (1<<RXC1) ) dUmmy = UDR1
 		;
 	}
+	uint8_t available(void){	
+		 if((UCSR1A & (1<<RXC1)))			 
+			return 1;				
+ 		else			
+			return 0;
+	}
 
 	void end(void){
 		flush();
@@ -590,6 +601,12 @@ int uBrr;
 		;
 		/* Get and return received data from buffer */
 		return UDR2;
+	}
+	uint8_t available(void){	
+		 if((UCSR2A & (1<<RXC2)))			 
+			return 1;				
+ 		else			
+			return 0;
 	}
 	void flush(void){
 		unsigned char dUmmy;
@@ -629,6 +646,12 @@ class Serial3
 		;
 		/* Get and return received data from buffer */
 		return UDR3;
+	}
+	uint8_t available(void){	
+		 if((UCSR3A & (1<<RXC3)))			 
+			return 1;				
+ 		else			
+			return 0;
 	}
 	void flush(void){
 		unsigned char dUmmy;
